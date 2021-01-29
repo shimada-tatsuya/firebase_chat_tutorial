@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "875884259189",
+    "firebase_url": "https://fir-app-tr-default-rtdb.firebaseio.com",
     "project_id": "fir-app-tr",
     "storage_bucket": "fir-app-tr.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "875884259189-3ifidmhmh9l89qqctlkpticfm8iuan1t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.firebaseapp",
+            "certificate_hash": "788cbdfcbed1d1d5e4122fd7c70f43ce01331b02"
+          }
+        },
         {
           "client_id": "875884259189-i1eiovfm73qks74439e10cg4tj6c3n30.apps.googleusercontent.com",
           "client_type": 3

@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
     //views
     EditText mEmailEt,mPasswordEt;
-    TextView notHaveAccntTv,mRecoverPassTv;
+    TextView notHaveAccountTv,mRecoverPassTv;
     Button mLoginBtn;
     SignInButton mGoogleLoginBtn;
 
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         //init
         mEmailEt = findViewById(R.id.emailEt);
         mPasswordEt = findViewById(R.id.passwordEt);
-        notHaveAccntTv = findViewById(R.id.nothave_accountTv);
+        notHaveAccountTv = findViewById(R.id.nothave_accountTv);
         mRecoverPassTv = findViewById(R.id.recoverPassTv);
         mLoginBtn = findViewById(R.id.loginBtn);
         mGoogleLoginBtn = findViewById(R.id.googleLoginBtn);
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //not have account textview click
-        notHaveAccntTv.setOnClickListener(new View.OnClickListener() {
+        notHaveAccountTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             //user is logged in , so start LoginActivity
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
                             finish();
                         } else {
                             //dismiss progress dialog
@@ -297,7 +297,7 @@ public class LoginActivity extends AppCompatActivity {
                             //show user email in toast
                             Toast.makeText(LoginActivity.this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
                             //go to profile activity after logged in
-                            startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
+                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
                             finish();
                             //updateUI(user);
                         } else {
