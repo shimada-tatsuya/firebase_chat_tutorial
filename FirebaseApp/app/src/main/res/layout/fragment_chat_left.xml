@@ -11,7 +11,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.firebaseapp.WelfareVolunteersActivity"
-    android:background="#8DD8D7D7">
+    android:background="@color/white">
 
 
     <androidx.recyclerview.widget.RecyclerView

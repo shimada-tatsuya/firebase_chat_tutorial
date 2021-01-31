@@ -69,7 +69,7 @@ public class ChatFragment extends Fragment {
         }
     }
 
-    private static final String TAG = "ChatActivity";
+    private static final String TAG = "ChatFragment";
     public static final String MESSAGES_CHILD = "messages";
     private static final int REQUEST_INVITE = 1;
     private static final int REQUEST_IMAGE = 2;
@@ -196,7 +196,13 @@ public class ChatFragment extends Fragment {
             @Override
             public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
+                Log.d(TAG,getSnapshots().get(0).getId());
+                //TODO:ログインしているユーザーのIDとメッセージに記録されているIDが一致するなら、右側に表示したい。
+//                if (mFirebaseUser.getUid().equals(getSnapshots().get(0).getId())){
+//                    return new MessageViewHolder(inflater.inflate(R.layout.item_message_right, viewGroup, false));
+//                } else {
+                    return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
+//                }
             }
 
             @Override
@@ -296,7 +302,7 @@ public class ChatFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FriendlyMessage friendlyMessage = new
-                        FriendlyMessage(mMessageEditText.getText().toString(),
+                        FriendlyMessage(mFirebaseUser.getUid(),mMessageEditText.getText().toString(),
                         mUsername,
                         mPhotoUrl,
                         null /* no image */);
@@ -398,7 +404,7 @@ public class ChatFragment extends Fragment {
                     final Uri uri = data.getData();
                     Log.d(TAG, "Uri: " + uri.toString());
 
-                    FriendlyMessage tempMessage = new FriendlyMessage(null, mUsername, mPhotoUrl,
+                    FriendlyMessage tempMessage = new FriendlyMessage(mFirebaseUser.getUid(),null, mUsername, mPhotoUrl,
                             LOADING_IMAGE_URL);
                     mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
@@ -439,7 +445,7 @@ public class ChatFragment extends Fragment {
                                                 public void onComplete(@NonNull Task<Uri> task) {
                                                     if (task.isSuccessful()) {
                                                         FriendlyMessage friendlyMessage =
-                                                                new FriendlyMessage(null, mUsername, mPhotoUrl,
+                                                                new FriendlyMessage(mFirebaseUser.getUid(),null, mUsername, mPhotoUrl,
                                                                         task.getResult().toString());
                                                         mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
                                                                 .setValue(friendlyMessage);

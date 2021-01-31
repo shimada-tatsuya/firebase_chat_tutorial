@@ -150,6 +150,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
+
                 return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
             }
 
@@ -250,7 +251,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FriendlyMessage friendlyMessage = new
-                        FriendlyMessage(mMessageEditText.getText().toString(),
+                        FriendlyMessage(mFirebaseUser.getUid(),mMessageEditText.getText().toString(),
                         mUsername,
                         mPhotoUrl,
                         null /* no image */);
@@ -350,7 +351,7 @@ public class ChatActivity extends AppCompatActivity {
                     final Uri uri = data.getData();
                     Log.d(TAG, "Uri: " + uri.toString());
 
-                    FriendlyMessage tempMessage = new FriendlyMessage(null, mUsername, mPhotoUrl,
+                    FriendlyMessage tempMessage = new FriendlyMessage(mFirebaseUser.getUid(),null, mUsername, mPhotoUrl,
                             LOADING_IMAGE_URL);
                     mFirebaseDatabaseReference.child(MESSAGES_CHILD).push()
                             .setValue(tempMessage, new DatabaseReference.CompletionListener() {
@@ -390,7 +391,7 @@ public class ChatActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Uri> task) {
                                                     if (task.isSuccessful()) {
                                                         FriendlyMessage friendlyMessage =
-                                                                new FriendlyMessage(null, mUsername, mPhotoUrl,
+                                                                new FriendlyMessage(mFirebaseUser.getUid(),null, mUsername, mPhotoUrl,
                                                                         task.getResult().toString());
                                                         mFirebaseDatabaseReference.child(MESSAGES_CHILD).child(key)
                                                                 .setValue(friendlyMessage);
