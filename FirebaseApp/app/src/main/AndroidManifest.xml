@@ -21,7 +21,7 @@
         android:theme="@style/Theme.FirebaseApp">
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".WelfareVolunteersActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MainActivity" >
         <intent-filter>

@@ -118,9 +118,9 @@ public class RegisterActivity extends AppCompatActivity {
                             //put info in hashmap
                             hashmap.put("email",email);
                             hashmap.put("uid",uid);
-                            hashmap.put("name",""); // will add later (e.g. edit profile)
+                            hashmap.put("name",""); // will add later (e.g. edit profile)ではなく、入力してもらった名前にしてもらう。
                             hashmap.put("phone",""); // will add later (e.g. edit profile)
-                            hashmap.put("image",""); // will add later (e.g. edit profile)
+                            hashmap.put("image",""); // will add later (e.g. edit profile)ここに画像のパスを入れられれば、登録を押したときに画像が登録できる。登録処理のやりかた確認
                             //firebase database instance
                             FirebaseDatabase database = FirebaseDatabase.getInstance();
                             //path to store user data named "Users"
@@ -130,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                             Toast.makeText(RegisterActivity.this, "Registered...\n"+user.getEmail(), Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(RegisterActivity.this, DashboardActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, WelfareVolunteersActivity.class));
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.

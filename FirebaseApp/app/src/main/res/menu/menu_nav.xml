@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/nav_home"
-        android:title="Home"
+    <item android:id="@+id/nav_allocation"
+        android:title="割り当て表"
         android:icon="@drawable/ic_home_black"/>
-    <item android:id="@+id/nav_profile"
-        android:title="Profile"
+    <item android:id="@+id/nav_chat"
+        android:title="チャット"
         android:icon="@drawable/ic_profile_black"/>
-    <item android:id="@+id/nav_users"
-        android:title="Users"
-        android:icon="@drawable/ic_users_black"/>
+<!--    <item android:id="@+id/nav_users"-->
+<!--        android:title="Users"-->
+<!--        android:icon="@drawable/ic_users_black"/>-->
 
 </menu>

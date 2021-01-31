@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeFragment">
+    tools:context=".AllocationFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
@@ -13,6 +13,6 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:gravity="center"
-        android:text="Home" />
+        android:text="割り当て表" />
 
 </FrameLayout>

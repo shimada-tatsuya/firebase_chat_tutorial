@@ -218,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             //user is logged in , so start LoginActivity
-                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
+                            startActivity(new Intent(LoginActivity.this, WelfareVolunteersActivity.class));
                             finish();
                         } else {
                             //dismiss progress dialog
@@ -297,7 +297,7 @@ public class LoginActivity extends AppCompatActivity {
                             //show user email in toast
                             Toast.makeText(LoginActivity.this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
                             //go to profile activity after logged in
-                            startActivity(new Intent(LoginActivity.this, ChatActivity.class));
+                            startActivity(new Intent(LoginActivity.this, WelfareVolunteersActivity.class));
                             finish();
                             //updateUI(user);
                         } else {

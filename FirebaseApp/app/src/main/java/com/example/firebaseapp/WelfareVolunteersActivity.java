@@ -9,13 +9,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class DashboardActivity extends AppCompatActivity {
+public class WelfareVolunteersActivity extends AppCompatActivity {
 
     //firebase auth
     FirebaseAuth firebaseAuth;
@@ -24,11 +23,11 @@ public class DashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
+        setContentView(R.layout.activity_welfarevolunteers);
 
         //Actionbar and its title
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Profile");
+        actionBar.setTitle("チャット");
 
         //init
         firebaseAuth = FirebaseAuth.getInstance();
@@ -37,9 +36,9 @@ public class DashboardActivity extends AppCompatActivity {
         BottomNavigationView navigationView = findViewById(R.id.navigation);
         navigationView.setOnNavigationItemSelectedListener(selectedListener);
 
-        //home fragment transaction(default, on star)
-        actionBar.setTitle("Home");//change actionbar title
-        HomeFragment fragment1 = new HomeFragment();
+        //allocation fragment transaction(default, on start)
+        actionBar.setTitle("割り当て表");//change actionbar title
+        AllocationFragment fragment1 = new AllocationFragment();
         FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
         ft1.replace(R.id.content,fragment1,"");
         ft1.commit();
@@ -52,32 +51,31 @@ public class DashboardActivity extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     //handle item clicks
                     switch (item.getItemId()){
-                        case R.id.nav_home:
-                            //home fragment transaction
-                            actionBar.setTitle("Home");//change actionbar title
-                            HomeFragment fragment1 = new HomeFragment();
+                        case R.id.nav_allocation:
+                            //allocation fragment transaction
+                            actionBar.setTitle("割り当て表");//change actionbar title
+                            AllocationFragment fragment1 = new AllocationFragment();
                             FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
                             ft1.replace(R.id.content,fragment1,"");
                             ft1.commit();
                             return true;
-                        case R.id.nav_profile:
-                            //profile fragment transaction
-
-                            actionBar.setTitle("Profile");//change actionbar title
-                            ProfileFragment fragment2 = new ProfileFragment();
+                        case R.id.nav_chat:
+                            //chat fragment transaction
+                            actionBar.setTitle("チャット");//change actionbar title
+                            ChatFragment fragment2 = new ChatFragment();
                             FragmentTransaction ft2 = getSupportFragmentManager().beginTransaction();
                             ft2.replace(R.id.content,fragment2,"");
                             ft2.commit();
 
                             return true;
-                        case R.id.nav_users:
-                            //users fragment transaction
-                            actionBar.setTitle("Users");//change actionbar title
-                            UsersFragment fragment3 = new UsersFragment();
-                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
-                            ft3.replace(R.id.content,fragment3,"");
-                            ft3.commit();
-                            return true;
+//                        case R.id.nav_users:
+//                            //users fragment transaction
+//                            actionBar.setTitle("Users");//change actionbar title
+//                            UsersFragment fragment3 = new UsersFragment();
+//                            FragmentTransaction ft3 = getSupportFragmentManager().beginTransaction();
+//                            ft3.replace(R.id.content,fragment3,"");
+//                            ft3.commit();
+//                            return true;
                     }
                     return false;
                 }
@@ -92,7 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
             //mProfileTv.setText(user.getEmail());
         }else {
             //user not signed in, go to main activity
-            startActivity(new Intent(DashboardActivity.this,MainActivity.class));
+            startActivity(new Intent(WelfareVolunteersActivity.this,MainActivity.class));
             finish();
         }
     }
