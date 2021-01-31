@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -146,7 +145,7 @@ public class ChatFragment extends Fragment {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         // Set default username is anonymous.
         mUsername = ANONYMOUS;
-        View view =inflater.inflate(R.layout.fragment_chat, container, false);
+        View view =inflater.inflate(R.layout.fragment_chat_left, container, false);
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -197,7 +196,7 @@ public class ChatFragment extends Fragment {
             @Override
             public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
                 LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                return new MessageViewHolder(inflater.inflate(R.layout.item_message, viewGroup, false));
+                return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
             }
 
             @Override
