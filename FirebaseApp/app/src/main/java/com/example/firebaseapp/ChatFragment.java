@@ -192,17 +192,29 @@ public class ChatFragment extends Fragment {
                 new FirebaseRecyclerOptions.Builder<FriendlyMessage>()
                         .setQuery(messagesRef, parser)
                         .build();
+
         mFirebaseAdapter = new FirebaseRecyclerAdapter<FriendlyMessage, MessageViewHolder>(options) {
+
             @Override
-            public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-                LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-                Log.d(TAG,getSnapshots().get(0).getId());
-                //TODO:ログインしているユーザーのIDとメッセージに記録されているIDが一致するなら、右側に表示したい。
-//                if (mFirebaseUser.getUid().equals(getSnapshots().get(0).getId())){
-//                    return new MessageViewHolder(inflater.inflate(R.layout.item_message_right, viewGroup, false));
-//                } else {
-                    return new MessageViewHolder(inflater.inflate(R.layout.item_message_left, viewGroup, false));
-//                }
+            public int getItemViewType(int position) {
+                int viewType =0;
+                Log.d(TAG,"userId:"+options.getSnapshots().getSnapshot(position).getValue(FriendlyMessage.class).getUserId());
+                if(mFirebaseUser.getUid().equals(options.getSnapshots().getSnapshot(position).getValue(FriendlyMessage.class).getUserId())){
+                    viewType=1;
+                }
+                return viewType;
+            }
+                @Override
+            public MessageViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+                View v = null;
+                if(viewType ==1){
+                    v = LayoutInflater.from(viewGroup.getContext())
+                            .inflate(R.layout.item_message_right, viewGroup, false);
+                }else{
+                    v = LayoutInflater.from(viewGroup.getContext())
+                            .inflate(R.layout.item_message_left, viewGroup, false);
+                }
+                       return new MessageViewHolder(v);
             }
 
             @Override
@@ -211,6 +223,10 @@ public class ChatFragment extends Fragment {
                                             FriendlyMessage friendlyMessage) {
                 mProgressBar.setVisibility(ProgressBar.INVISIBLE);
                 if (friendlyMessage.getText() != null) {
+                    if(mFirebaseUser.getUid().equals(friendlyMessage.getUserId())){
+
+                    }
+
                     viewHolder.messageTextView.setText(friendlyMessage.getText());
                     viewHolder.messageTextView.setVisibility(TextView.VISIBLE);
                     viewHolder.messageImageView.setVisibility(ImageView.GONE);
@@ -244,14 +260,20 @@ public class ChatFragment extends Fragment {
                 }
 
 
-                viewHolder.messengerTextView.setText(friendlyMessage.getName());
+                if(viewHolder.messengerTextView !=null) {
+                    viewHolder.messengerTextView.setText(friendlyMessage.getName());
+                }
                 if (friendlyMessage.getPhotoUrl() == null) {
-                    viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(ChatFragment.this.getContext(),
-                            R.drawable.ic_account_circle_black_36dp));
+                    if(viewHolder.messengerImageView !=null) {
+                        viewHolder.messengerImageView.setImageDrawable(ContextCompat.getDrawable(ChatFragment.this.getContext(),
+                                R.drawable.ic_account_circle_black_36dp));
+                    }
                 } else {
-                    Glide.with(ChatFragment.this)
-                            .load(friendlyMessage.getPhotoUrl())
-                            .into(viewHolder.messengerImageView);
+                    if(viewHolder.messengerImageView !=null) {
+                        Glide.with(ChatFragment.this)
+                                .load(friendlyMessage.getPhotoUrl())
+                                .into(viewHolder.messengerImageView);
+                    }
                 }
 
             }
@@ -323,6 +345,7 @@ public class ChatFragment extends Fragment {
             }
         });
         // Inflate the layout for this fragment
+
         return view;
     }
 
